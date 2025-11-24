@@ -1,0 +1,59 @@
+# Terraform 변수 예제 파일
+# 실제 사용 시 terraform.tfvars로 복사하고 값을 수정하세요
+
+aws_region = "ap-northeast-2"
+project_name = "receipt-api"
+environment = "prod"
+
+# VPC 설정
+vpc_cidr = "10.0.0.0/16"
+availability_zones = ["ap-northeast-2a", "ap-northeast-2c"]
+
+# Subnet CIDR 블록
+public_subnet_cidrs = ["10.0.1.0/24", "10.0.2.0/24"]
+private_app_subnet_cidrs = ["10.0.11.0/24", "10.0.12.0/24"]
+private_db_subnet_cidrs = ["10.0.21.0/24", "10.0.22.0/24"]
+
+# ECS 설정
+ecs_cluster_name = "receipt-api-cluster"
+ecs_service_name = "receipt-api-service"
+ecs_task_cpu = 512
+ecs_task_memory = 1024
+ecs_desired_count = 2
+ecs_min_count = 2
+ecs_max_count = 10
+ecs_cpu_scale_threshold = 70
+ecs_cpu_scale_in_threshold = 30
+
+# Docker 이미지
+docker_image = "ghcr.io/spandit/receipt-api:latest"
+
+# RDS 설정
+rds_instance_class = "db.t3.medium"
+rds_allocated_storage = 100
+rds_max_allocated_storage = 200
+rds_engine_version = "15.4"
+rds_backup_retention_period = 7
+rds_multi_az = true
+
+# Active/Standby 구조: Multi-AZ로 자동 구현
+# Primary (Active)와 Standby는 Multi-AZ 설정으로 자동 생성됨
+
+# Secrets Manager
+db_secret_name = "receipt-api/db-credentials"
+
+# CloudWatch
+cloudwatch_log_retention_days = 7
+
+# Slack 알림 설정 (선택사항)
+# Slack Webhook URL을 설정하면 주요 지표 알림이 Slack으로 전송됩니다
+# Slack Webhook URL 생성 방법: https://api.slack.com/messaging/webhooks
+slack_webhook_url = ""  # 예: "https://hooks.slack.com/services/YOUR/WEBHOOK/URL"
+
+# 공통 태그
+common_tags = {
+  Project     = "receipt-api"
+  Environment = "prod"
+  ManagedBy   = "Terraform"
+}
+
